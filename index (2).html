@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Modul Ajar Interaktif: Spreadsheet untuk Akuntansi</title>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--tx:#1b2430;--mu:#5d6b7c;--pr:#0f9d74;--pr2:#e3f6ef;--ac:#f59e0b;--bd:#dde3ec;--er:#e5484d;--bl:#2f6fed;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1520;--card:#18212f;--tx:#eaf0f7;--mu:#9aa9bb;--pr:#35d0a0;--pr2:#12342b;--bd:#2a3648;--bl:#6b9bff}}
+:root[data-theme="dark"]{--bg:#0f1520;--card:#18212f;--tx:#eaf0f7;--mu:#9aa9bb;--pr:#35d0a0;--pr2:#12342b;--bd:#2a3648;--bl:#6b9bff}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding-bottom:84px}
+header{background:linear-gradient(135deg,#0f9d74,#2f6fed);color:#fff;padding:22px 18px 26px}
+header small{opacity:.85}header h1{margin:4px 0 6px;font-size:22px;line-height:1.25}
+.chips span{display:inline-block;background:rgba(255,255,255,.2);border-radius:99px;padding:2px 10px;font-size:12px;margin:2px 4px 0 0}
+main{max-width:720px;margin:0 auto;padding:14px}
+section{display:none}section.on{display:block}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:14px 16px;margin:0 0 12px}
+.card h3{margin:0 0 6px;font-size:17px}.mu{color:var(--mu);font-size:14px}
+.k{background:var(--pr2);border-left:4px solid var(--pr);border-radius:10px;padding:10px 12px;margin:8px 0}
+.w{background:#fff4d6;color:#5a4300;border-left:4px solid var(--ac);border-radius:10px;padding:10px 12px;margin:8px 0}
+code{background:var(--pr2);color:var(--pr);padding:1px 6px;border-radius:6px;font-weight:600}
+nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--card);border-top:1px solid var(--bd);padding-bottom:env(safe-area-inset-bottom,0px);z-index:9}
+nav button{flex:1;border:0;background:none;color:var(--mu);padding:9px 2px 8px;font-size:11px;font-weight:600}
+nav button b{display:block;font-size:20px;font-weight:400}nav button.on{color:var(--pr)}
+.btn{border:0;background:var(--pr);color:#fff;border-radius:12px;padding:10px 16px;font-weight:700;font-size:15px}
+.btn.o{background:none;color:var(--pr);border:2px solid var(--pr)}
+details{border:1px solid var(--bd);border-radius:12px;padding:8px 12px;margin:8px 0;background:var(--card)}
+summary{font-weight:700;cursor:pointer}
+.sc{overflow-x:auto;max-width:100%}
+table.sh{border-collapse:collapse;width:100%;min-width:300px;font-size:14px}
+.sh th{background:var(--pr2);color:var(--pr);font-weight:700;padding:6px;border:1px solid var(--bd);text-align:center}
+.sh td{border:1px solid var(--bd);padding:8px 6px;text-align:right;min-width:70px;height:40px}
+.sh td:first-child{text-align:left}.sh td.sel{outline:3px solid var(--bl);outline-offset:-2px;background:var(--pr2)}
+.sh td.f{color:var(--bl);font-weight:600}.sh td.hd{font-weight:700;background:var(--bg)}
+.fb{display:flex;gap:6px;margin:8px 0}.fb span{background:var(--pr);color:#fff;border-radius:8px;padding:8px 10px;font-weight:700;min-width:46px;text-align:center}
+.fb input{flex:1;min-width:0;border:2px solid var(--bl);border-radius:8px;padding:8px;font-size:16px;background:var(--card);color:var(--tx)}
+.ms{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px dashed var(--bd)}
+.ms i{font-style:normal;font-size:20px}.ms.ok{color:var(--pr)}
+.seg{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}
+.seg button{border:2px solid var(--bd);background:var(--card);color:var(--tx);border-radius:99px;padding:6px 12px;font-weight:600}
+.seg button.on{border-color:var(--pr);background:var(--pr2);color:var(--pr)}
+.opt{display:block;width:100%;text-align:left;border:2px solid var(--bd);background:var(--card);color:var(--tx);border-radius:12px;padding:10px 12px;margin:6px 0;font-size:15px}
+.opt.good{border-color:var(--pr);background:var(--pr2)}.opt.bad{border-color:var(--er)}
+.bar{height:10px;background:var(--bd);border-radius:9px;overflow:hidden}.bar div{height:100%;background:var(--pr);width:0;transition:width .3s}
+ol,ul{padding-left:20px;margin:6px 0}
+.tg{float:right}.in{display:block;width:100%;border:2px solid var(--bd);border-radius:10px;padding:10px;font-size:16px;margin:4px 0 12px;background:var(--card);color:var(--tx)}.st{display:flex;justify-content:space-between;gap:8px;padding:7px 0;border-bottom:1px dashed var(--bd)}.btn:disabled{opacity:.4}.er{background:#fde8e8;color:#7a1d1d;border-left:4px solid var(--er);border-radius:10px;padding:10px 12px;margin:8px 0}
+</style>
+</head>
+<body>
+<header>
+<small>Informatika • Kelas X AKL • Okt 2026 minggu ke-3 • 4 JP</small>
+<h1>📊 Spreadsheet Si Akuntan Muda</h1>
+<div class="chips"><span>Analisis data</span><span>Grafik &amp; laporan</span><span>100% bisa di HP</span></div>
+</header>
+<main>
+
+<section id="sb" class="on">
+<div class="card"><h3>👤 Identitas</h3>
+<p class="mu">Isi dulu sebelum mulai. Data ini dipakai saat mengirim hasil ke guru.</p>
+<label class="mu">Nama lengkap</label>
+<input id="nm" class="in" autocomplete="name" placeholder="Contoh: Siti Aisyah" oninput="setProf()">
+<label class="mu">Kelas</label>
+<input id="kl" class="in" list="kls" placeholder="Contoh: X AKL" oninput="setProf()">
+<datalist id="kls"><option value="X AKL"><option value="X AKL 1"><option value="X AKL 2"></datalist></div>
+<div class="card"><h3>🎯 Tujuan Pembelajaran (TP)</h3>
+<ol><li>Melakukan analisis data menggunakan perangkat lunak lembar kerja (spreadsheet) dengan benar.</li><li>Menginterpretasi hasil analisis data dan menyajikannya dalam bentuk grafik dan laporan.</li></ol></div>
+<div class="card"><h3>📘 Capaian Pembelajaran (CP) Fase E</h3>
+<p>Peserta didik mampu memahami pemanfaatan beragam perkakas teknologi digital untuk membuat laporan, presentasi, serta analisis dan interpretasi data.</p>
+<details><summary>Lihat CP Informatika Fase E selengkapnya</summary><p>Pada akhir Fase E, peserta didik mampu menerapkan proses berpikir efektif dan efisien untuk menyelesaikan persoalan secara algoritmik, menerapkan berpikir kritis dalam menyikapi beragam data yang tersedia di internet untuk menjadi informasi yang bermanfaat, mempunyai wawasan tentang profesi informatika, serta memahami hak dan kewajiban sebagai warga digital dan aspek hukumnya.</p></details></div>
+<div class="card"><h3>🇮🇩 Profil Pelajar Pancasila</h3>
+<ul><li><b>Bernalar kritis:</b> membaca grafik dan menarik kesimpulan dari data.</li><li><b>Mandiri:</b> mengerjakan misi dan memeriksa rumus sendiri.</li><li><b>Gotong royong:</b> berbagi peran dengan teman saat praktik berpasangan.</li><li><b>Kreatif:</b> memilih jenis grafik dan menulis laporan dengan kalimat sendiri.</li></ul></div>
+<button class="btn" onclick="go(1)">Mulai belajar ➜</button>
+</section>
+
+<section id="s0">
+<div class="card"><h3>🎯 Tujuan hari ini</h3>
+<ol><li>Melakukan analisis data memakai lembar kerja (spreadsheet) dengan benar.</li><li>Menginterpretasi hasil analisis dan menyajikannya dalam grafik &amp; laporan.</li></ol>
+<p class="mu">Kamu tidak butuh laptop. Semua latihan ada di HP ini.</p></div>
+
+<div class="card"><h3>🤔 Pancingan</h3>
+<p>Bu Kantin mencatat uang masuk dan keluar tiap hari di buku. Akhir bulan dia pusing menjumlah <b>200 baris</b> pakai kalkulator. Apa yang bisa kamu bantu?</p>
+<details><summary>Tap untuk lihat jawabannya</summary><p>Pakai <b>spreadsheet</b>: tulis rumus sekali, hasil terhitung otomatis. Data berubah, hasil ikut berubah. Inilah kerja harian staf akuntansi.</p></details></div>
+
+<div class="card"><h3>🧱 1. Kenali bagian spreadsheet</h3>
+<div class="sc"><table class="sh"><tr><th></th><th>A</th><th>B</th><th>C</th></tr><tr><td class="hd">1</td><td class="hd">Bulan</td><td class="hd">Kas Masuk</td><td class="hd">Kas Keluar</td></tr><tr><td class="hd">2</td><td>Juli</td><td>12</td><td>9</td></tr></table></div>
+<ul><li><b>Kolom</b> = lajur ke bawah (A, B, C)</li><li><b>Baris</b> = lajur ke samping (1, 2, 3)</li><li><b>Sel</b> = pertemuan keduanya. Angka <b>12</b> ada di sel <code>B2</code></li><li><b>Rentang</b> = kumpulan sel, mis. <code>B2:B7</code></li></ul>
+<div class="k">Tebak cepat: Sel yang berisi "Juli" bernama…? <details><summary>Jawab</summary><code>A2</code> (kolom A, baris 2)</details></div></div>
+
+<div class="card"><h3>🧮 2. Rumus = perintah ke spreadsheet</h3>
+<p>Semua rumus diawali tanda <code>=</code></p>
+<table class="sh"><tr><th>Rumus</th><th>Fungsi</th><th>Contoh akuntansi</th></tr>
+<tr><td><code>=B2-C2</code></td><td style="text-align:left">Kurang</td><td style="text-align:left">Laba = masuk − keluar</td></tr>
+<tr><td><code>=SUM(B2:B7)</code></td><td style="text-align:left">Jumlah</td><td style="text-align:left">Total penjualan</td></tr>
+<tr><td><code>=AVERAGE()</code></td><td style="text-align:left">Rata-rata</td><td style="text-align:left">Rata-rata laba</td></tr>
+<tr><td><code>=MAX()</code></td><td style="text-align:left">Tertinggi</td><td style="text-align:left">Bulan laba terbesar</td></tr>
+<tr><td><code>=MIN()</code></td><td style="text-align:left">Terendah</td><td style="text-align:left">Biaya terkecil</td></tr></table>
+<div class="w">⚠️ Salah umum: lupa tanda <code>=</code>. Tanpa <code>=</code>, "B2-C2" dianggap tulisan biasa.</div></div>
+
+<div class="card"><h3>📈 3. Pilih grafik yang tepat</h3>
+<ul><li><b>Batang</b>: membandingkan nilai antar kategori (kas masuk tiap bulan)</li><li><b>Garis</b>: melihat tren naik/turun dari waktu ke waktu</li><li><b>Lingkaran</b>: bagian dari keseluruhan (porsi jenis biaya)</li></ul>
+<div class="k">Rumus membaca grafik: <b>Lihat judul → lihat sumbu → cari tertinggi/terendah → simpulkan tren → beri saran.</b></div></div>
+<button class="btn" onclick="go(2)">Mulai praktik di tab Praktik ➜</button>
+</section>
+
+<section id="s1">
+<div class="card"><h3>🧪 Lab Spreadsheet Mini</h3>
+<p class="mu">Data kas koperasi sekolah (juta rupiah). Tap sel, ketik isi atau rumus di kotak, lalu tekan OK.</p>
+<div class="fb"><span id="cn">A1</span><input id="ci" autocomplete="off" autocapitalize="off" placeholder="ketik rumus, mis. =B2-C2"><button class="btn" onclick="commit()">OK</button></div>
+<div class="sc"><table class="sh" id="grid"></table></div>
+<p class="mu">Selalu mulai rumus dengan <code>=</code>. Dukungan: + − × ÷, SUM, AVERAGE, MAX, MIN.</p></div>
+<div class="card"><h3>🏅 Misi <span class="tg" id="mp">0/6</span></h3>
+<div class="bar"><div id="mb"></div></div><div id="ml"></div>
+<button class="btn o" onclick="resetSheet()" style="margin-top:8px">Ulangi dari awal</button></div>
+</section>
+
+<section id="s2">
+<div class="card"><h3>📉 Ubah data jadi grafik</h3>
+<p class="mu">Grafik memakai data dari Lab. Selesaikan kolom D (Laba) dulu agar lengkap.</p>
+<div class="seg" id="gs"></div><div class="seg" id="gt"></div>
+<div id="ch"></div>
+<div class="k" id="ins"></div></div>
+<div class="card"><h3>✍️ Tulis laporan 3 kalimat</h3>
+<p class="mu">Gunakan pola: <b>Fakta</b> (angka apa) → <b>Tren</b> (naik/turun) → <b>Saran</b>.</p>
+<textarea id="lp" rows="4" style="width:100%;border:2px solid var(--bd);border-radius:10px;padding:8px;font:inherit;background:var(--card);color:var(--tx)" placeholder="Contoh: Laba tertinggi terjadi pada bulan … sebesar … Tren laba cenderung … Saran saya, koperasi sebaiknya …"></textarea>
+<p class="mu">Tunjukkan ke gurumu atau tukar dengan teman untuk dinilai.</p></div>
+</section>
+
+<section id="s3">
+<div class="card"><h3>🎮 Kuis Kilat</h3><div class="bar"><div id="qb"></div></div><div id="qa" style="margin-top:10px"></div></div>
+</section>
+
+<section id="sk">
+<div class="card"><h3>📤 Kirim Hasil ke Guru</h3><div id="ks"></div></div>
+</section>
+</main>
+
+<nav id="nv">
+<button class="on" onclick="go(0)"><b>🏠</b>Beranda</button>
+<button onclick="go(1)"><b>📖</b>Belajar</button>
+<button onclick="go(2)"><b>🧪</b>Praktik</button>
+<button onclick="go(3)"><b>📈</b>Grafik</button>
+<button onclick="go(4)"><b>🎮</b>Kuis</button>
+<button onclick="go(5)"><b>📤</b>Kirim</button>
+</nav>
+
+<script>
+var $=function(i){return document.getElementById(i)};
+var SEC=['sb','s0','s1','s2','s3','sk'];
+function go(n){SEC.forEach(function(id,i){$(id).classList.toggle('on',i==n);$('nv').children[i].classList.toggle('on',i==n)});if(n==3)drawChart();if(n==5)refreshKirim();window.scrollTo(0,0)}
+
+/* ===== Spreadsheet engine ===== */
+var COLS=['A','B','C','D'],ROWS=10;
+var INIT={A1:'Bulan',B1:'Kas Masuk',C1:'Kas Keluar',D1:'Laba',
+A2:'Juli',B2:'12',C2:'9',A3:'Agustus',B3:'15',C3:'10',A4:'September',B4:'11',C4:'10',
+A5:'Oktober',B5:'18',C5:'12',A6:'November',B6:'20',C6:'14',A7:'Desember',B7:'25',C7:'16',
+A8:'Total',A9:'Rata-rata laba',A10:'Laba tertinggi'};
+var S={},sel='A1';
+function resetSheet(){S=JSON.parse(JSON.stringify(INIT));sel='A1';sent=false;render();missions()}
+function cv(ref,d){d=d||0;if(d>20)throw 0;var raw=S[ref];if(raw===undefined||raw==='')return 0;
+ if(raw.charAt(0)=='='){return ev(raw.slice(1),d+1)}var n=Number(raw);return isNaN(n)?raw:n}
+function rng(a,b,d){var o=[],c1=a.charCodeAt(0),c2=b.charCodeAt(0),r1=+a.slice(1),r2=+b.slice(1);
+ for(var c=Math.min(c1,c2);c<=Math.max(c1,c2);c++)for(var r=Math.min(r1,r2);r<=Math.max(r1,r2);r++){var v=cv(String.fromCharCode(c)+r,d);if(typeof v=='number'&&(S[String.fromCharCode(c)+r]||'')!=='')o.push(v)}return o}
+function flat(a){var o=[];a.forEach(function(x){if(Array.isArray(x))o=o.concat(x);else if(typeof x=='number')o.push(x)});return o}
+function ev(e,d){e=e.toUpperCase().replace(/\s/g,'');
+ if(!/^[0-9A-D+\-*\/().:,%]*$/.test(e.replace(/SUM|AVERAGE|MAX|MIN/g,'')))throw 0;
+ e=e.replace(/([A-D]\d+):([A-D]\d+)/g,function(m,a,b){return 'R("'+a+'","'+b+'")'}).replace(/(^|[^"A-Z])([A-D]\d+)(?![\d"])/g,function(m,p,a){return p+'C("'+a+'")'});
+ var f=new Function('R','C','SUM','AVERAGE','MAX','MIN','return '+e);
+ var r=f(function(a,b){return rng(a,b,d)},function(a){var v=cv(a,d);return typeof v=='number'?v:0},
+ function(){var a=flat([].slice.call(arguments));return a.reduce(function(x,y){return x+y},0)},
+ function(){var a=flat([].slice.call(arguments));return a.length?a.reduce(function(x,y){return x+y},0)/a.length:0},
+ function(){var a=flat([].slice.call(arguments));return Math.max.apply(null,a)},
+ function(){var a=flat([].slice.call(arguments));return Math.min.apply(null,a)});
+ if(typeof r!='number'||!isFinite(r))throw 0;return r}
+function show(ref){var raw=S[ref]||'';if(raw.charAt(0)!='=')return raw;try{var v=cv(ref);return(Math.round(v*100)/100).toString()}catch(x){return '#ERR'}}
+function render(){var h='<tr><th></th>'+COLS.map(function(c){return '<th>'+c+'</th>'}).join('')+'</tr>';
+ for(var r=1;r<=ROWS;r++){h+='<tr><td class="hd" style="text-align:center;min-width:28px">'+r+'</td>';
+ COLS.forEach(function(c){var k=c+r,cl=(k==sel?'sel ':'')+((S[k]||'').charAt(0)=='='?'f ':'')+(r==1?'hd':'');
+ h+='<td class="'+cl+'" onclick="pick(\''+k+'\')">'+show(k)+'</td>'});h+='</tr>'}
+ $('grid').innerHTML=h;$('cn').textContent=sel;$('ci').value=S[sel]||''}
+function pick(k){sel=k;render();$('ci').focus()}
+function commit(){S[sel]=$('ci').value.trim();render();missions()}
+$('ci').addEventListener('keydown',function(e){if(e.key=='Enter')commit()});
+
+var M=[
+['Isi D2 dengan rumus laba bulan Juli (kas masuk − kas keluar)',['D2'],function(){return isF('D2')&&val('D2')==3}],
+['Isi D3 sampai D7 dengan rumus yang sama (laba tiap bulan)',['D3','D4','D5','D6','D7'],function(){var l=[5,1,6,6,9];return l.every(function(x,i){return isF('D'+(i+3))&&val('D'+(i+3))==x})}],
+['Hitung total kas masuk di B8 dengan SUM',['B8'],function(){return isF('B8')&&val('B8')==101}],
+['Hitung total laba di D8 dengan SUM',['D8'],function(){return isF('D8')&&val('D8')==30}],
+['Rata-rata laba di D9 dengan AVERAGE',['D9'],function(){return isF('D9')&&val('D9')==5}],
+['Laba tertinggi di D10 dengan MAX',['D10'],function(){return isF('D10')&&val('D10')==9}]];
+function isF(k){return(S[k]||'').charAt(0)=='='}
+function val(k){try{var v=cv(k);return typeof v=='number'?v:NaN}catch(x){return NaN}}
+var ST=[0,0,0,0,0,0],LBL=['Kosong','Salah','Benar'];
+function missions(){var n=0,t=0,h='';M.forEach(function(m,i){
+ var filled=m[1].every(function(k){return(S[k]||'')!==''}),ok=false;
+ if(filled){try{ok=m[2]()}catch(x){}}
+ ST[i]=!filled?0:(ok?2:1);if(ST[i]==2)n++;if(ST[i]>0)t++;
+ h+='<div class="ms'+(ST[i]==2?' ok':'')+'"><i>'+['⬜','❌','✅'][ST[i]]+'</i><span>'+(i+1)+'. '+m[0]+(ST[i]==1?'<br><small class="mu">Sudah terisi tapi belum tepat. Boleh diperbaiki, hasil terakhir yang dikirim.</small>':'')+'</span></div>'});
+ if(n==6)h+='<div class="k">🎉 Hebat! Semua misi benar. Lanjut ke tab Grafik.</div>';
+ $('ml').innerHTML=h;$('mp').textContent=n+'/6';$('mb').style.width=(n/6*100)+'%';save();refreshKirim()}
+
+/* ===== Chart ===== */
+var gc='B',gt='bar',GN={B:'Kas Masuk',C:'Kas Keluar',D:'Laba'};
+function drawChart(){
+ $('gs').innerHTML=Object.keys(GN).map(function(k){return '<button class="'+(k==gc?'on':'')+'" onclick="gc=\''+k+'\';drawChart()">'+GN[k]+'</button>'}).join('');
+ $('gt').innerHTML=[['bar','Batang'],['line','Garis']].map(function(t){return '<button class="'+(t[0]==gt?'on':'')+'" onclick="gt=\''+t[0]+'\';drawChart()">'+t[1]+'</button>'}).join('');
+ var v=[],l=[];for(var r=2;r<=7;r++){l.push((S['A'+r]||'').slice(0,3));v.push(val(gc+r))}
+ if(v.some(isNaN)||(gc=='D'&&!S.D2)){$('ch').innerHTML='<div class="w">Data kolom '+GN[gc]+' belum lengkap. Selesaikan misi 1-2 di tab Praktik.</div>';$('ins').innerHTML='';return}
+ var mx=Math.max.apply(null,v)*1.15,W=320,H=200,pl=30,pb=26,pw=W-pl-6,ph=H-pb-14,s='<svg viewBox="0 0 '+W+' '+H+'" width="100%" role="img" aria-label="Grafik '+GN[gc]+'">';
+ s+='<text x="'+W/2+'" y="11" text-anchor="middle" font-size="11" font-weight="700" fill="currentColor">'+GN[gc]+' per Bulan (juta Rp)</text>';
+ for(var g=0;g<=4;g++){var y=14+ph-ph*g/4;s+='<line x1="'+pl+'" x2="'+(W-6)+'" y1="'+y+'" y2="'+y+'" stroke="#8885" stroke-width=".6"/><text x="'+(pl-4)+'" y="'+(y+3)+'" text-anchor="end" font-size="9" fill="currentColor">'+Math.round(mx*g/4)+'</text>'}
+ var bw=pw/6,pts=[];v.forEach(function(x,i){var h=ph*x/mx,cx=pl+bw*i+bw/2,y=14+ph-h;pts.push(cx+','+y);
+  if(gt=='bar')s+='<rect x="'+(cx-bw*.3)+'" y="'+y+'" width="'+bw*.6+'" height="'+h+'" rx="3" fill="#0f9d74"/>';
+  s+='<text x="'+cx+'" y="'+(y-3)+'" text-anchor="middle" font-size="9" font-weight="700" fill="currentColor">'+x+'</text><text x="'+cx+'" y="'+(H-10)+'" text-anchor="middle" font-size="9" fill="currentColor">'+l[i]+'</text>'});
+ if(gt=='line'){s+='<polyline points="'+pts.join(' ')+'" fill="none" stroke="#2f6fed" stroke-width="2.5"/>';pts.forEach(function(p){var q=p.split(',');s+='<circle cx="'+q[0]+'" cy="'+q[1]+'" r="3.5" fill="#2f6fed"/>'})}
+ $('ch').innerHTML=s+'</svg>';
+ var hi=v.indexOf(Math.max.apply(null,v)),lo=v.indexOf(Math.min.apply(null,v)),tr=v[5]>v[0]?'naik':(v[5]<v[0]?'turun':'stabil'),sum=v.reduce(function(a,b){return a+b},0);
+ $('ins').innerHTML='<b>🔍 Insight otomatis:</b><ul><li>Tertinggi: <b>'+S['A'+(hi+2)]+'</b> ('+v[hi]+')</li><li>Terendah: <b>'+S['A'+(lo+2)]+'</b> ('+v[lo]+')</li><li>Rata-rata: <b>'+(Math.round(sum/6*10)/10)+'</b></li><li>Tren Juli ke Desember: <b>'+tr+'</b></li></ul>Coba ganti ke grafik <b>garis</b>: mana yang lebih jelas untuk melihat tren?'}
+
+/* ===== Quiz ===== */
+var Q=[
+['Sel yang berada di kolom C baris 5 bernama…',['C5','5C','C.5','CC5'],0,'Penamaan sel: huruf kolom dulu, lalu nomor baris.'],
+['Rumus yang BENAR untuk menjumlah B2 sampai B7 adalah…',['SUM(B2:B7)','=SUM(B2:B7)','=B2:B7','+SUM B2-B7'],1,'Rumus selalu diawali "=" dan rentang ditulis dengan titik dua.'],
+['Laba = kas masuk − kas keluar. Jika kas masuk di B2 dan kas keluar di C2, rumusnya…',['=C2-B2','=B2+C2','=B2-C2','B2-C2'],2,'Urutan pengurangan penting. Jangan lupa tanda "=".'],
+['Untuk mengetahui bulan dengan laba terbesar, fungsi yang paling tepat…',['MIN','MAX','SUM','COUNT'],1,'MAX mencari nilai tertinggi.'],
+['Grafik paling cocok untuk melihat TREN kas dari bulan ke bulan…',['Grafik garis','Grafik lingkaran','Tidak perlu grafik','Tabel saja'],0,'Garis memperlihatkan naik-turun seiring waktu.'],
+['Setelah membaca grafik, langkah laporan yang baik adalah…',['Menyalin angka saja','Fakta, tren, lalu saran','Hanya menulis judul','Menghapus data'],1,'Interpretasi = fakta + tren + saran tindakan.']];
+var qi=0,qs=0,qDone=false;
+function qr(){if(qi>=Q.length){qDone=true;refreshKirim();var m=qs>=5?'🏆 Luar biasa!':qs>=3?'👍 Bagus, ulangi bagian yang masih keliru.':'💪 Baca lagi tab Belajar, lalu coba lagi.';
+ $('qa').innerHTML='<h3>Skor kamu: '+qs+'/'+Q.length+'</h3><p>'+m+'</p><button class="btn" onclick="qi=0;qs=0;qDone=false;refreshKirim();qr()">Main lagi</button>';$('qb').style.width='100%';return}
+ var q=Q[qi];$('qb').style.width=(qi/Q.length*100)+'%';
+ $('qa').innerHTML='<p class="mu">Soal '+(qi+1)+' dari '+Q.length+'</p><p><b>'+q[0]+'</b></p>'+q[1].map(function(o,i){return '<button class="opt" onclick="ans('+i+')">'+o+'</button>'}).join('')+'<div id="qf"></div>'}
+function ans(i){var q=Q[qi],b=document.querySelectorAll('.opt');if(b[0].disabled)return;
+ b.forEach(function(x,j){x.disabled=true;if(j==q[2])x.classList.add('good');else if(j==i)x.classList.add('bad')});
+ if(i==q[2])qs++;$('qf').innerHTML='<div class="k">'+(i==q[2]?'✅ Benar! ':'❌ Belum tepat. ')+q[3]+'</div><button class="btn" onclick="qi++;qr()">Lanjut ➜</button>'}
+/* ===== Profil, simpan lokal, kirim ke guru ===== */
+var GAS_URL='GANTI_DENGAN_URL_WEB_APP_APPS_SCRIPT',sent=false,busy=false;
+function save(){try{localStorage.setItem('akl_x',JSON.stringify({S:S,n:$('nm').value,k:$('kl').value}))}catch(e){}}
+function setProf(){sent=false;save();refreshKirim()}
+function ringkas(){var b=[],s=[],k=[];ST.forEach(function(x,i){(x==2?b:x==1?s:k).push(i+1)});
+ return 'Benar misi: '+(b.join(',')||'-')+' | Salah misi: '+(s.join(',')||'-')+' | Belum diisi: '+(k.join(',')||'-')}
+function refreshKirim(){var el=$('ks');if(!el)return;
+ var nama=$('nm').value.trim(),kelas=$('kl').value.trim(),n=ST.filter(function(x){return x==2}).length,
+ allFilled=ST.every(function(x){return x>0}),ok=nama&&kelas&&allFilled&&qDone;
+ var h='<div class="st"><span>Nama</span><b>'+(nama?esc(nama):'⚠️ belum diisi (tab Beranda)')+'</b></div><div class="st"><span>Kelas</span><b>'+(kelas?esc(kelas):'⚠️ belum diisi')+'</b></div>';
+ ST.forEach(function(x,i){h+='<div class="st"><span>Misi '+(i+1)+'</span><b>'+['⬜ Belum diisi','❌ Salah','✅ Benar'][x]+'</b></div>'});
+ h+='<div class="st"><span>Misi benar</span><b>'+n+' dari 6</b></div><div class="st"><span>Kuis</span><b>'+(qDone?qs+' dari '+Q.length:'⬜ belum selesai')+'</b></div>';
+ h+=ok?'<p class="mu">Semua jawaban sudah tercatat. Jawaban yang salah tetap dikirim apa adanya.</p>':'<div class="w">Tombol aktif setelah nama, kelas, 6 misi terisi, dan kuis selesai.</div>';
+ h+='<button class="btn" id="kb" onclick="kirim()" '+(ok&&!busy?'':'disabled')+'>'+(sent?'✅ Terkirim (kirim ulang)':'📤 Kirim ke Guru')+'</button><div id="km"></div>';
+ el.innerHTML=h}
+function esc(s){return s.replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function kirim(){
+ if(GAS_URL.indexOf('http')!=0){$('km').innerHTML='<div class="er">Alamat pengiriman belum dipasang oleh guru.</div>';return}
+ var d={nama:$('nm').value.trim(),kelas:$('kl').value.trim(),benar:ST.filter(function(x){return x==2}).length,misi:ST.map(function(x){return LBL[x]}),ringkasan:ringkas(),kuis:qs,laporan:($('lp').value||'').trim()};
+ busy=true;refreshKirim();$('km').innerHTML='<p class="mu">Mengirim…</p>';
+ fetch(GAS_URL,{method:'POST',body:JSON.stringify(d)}).then(function(r){return r.json()}).then(function(j){
+  busy=false;if(!j.ok)throw 0;sent=true;refreshKirim();$('km').innerHTML='<div class="k">✅ Terkirim ke guru. Terima kasih, '+esc(d.nama)+'!</div>'})
+ .catch(function(){busy=false;refreshKirim();$('km').innerHTML='<div class="er">Gagal mengirim. Periksa sinyal, lalu tekan tombol lagi.</div>'})}
+
+try{var sv=JSON.parse(localStorage.getItem('akl_x'));if(sv){if(sv.S)S=sv.S;$('nm').value=sv.n||'';$('kl').value=sv.k||'X AKL'}}catch(e){}
+if(!$('kl').value)$('kl').value='X AKL';
+if(!Object.keys(S).length)S=JSON.parse(JSON.stringify(INIT));
+sel='A1';render();missions();qr();
+
+</script>
+</body>
+</html>
