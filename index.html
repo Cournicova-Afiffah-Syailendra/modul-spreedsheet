@@ -235,7 +235,7 @@ function ans(i){var q=Q[qi],b=document.querySelectorAll('.opt');if(b[0].disabled
  b.forEach(function(x,j){x.disabled=true;if(j==q[2])x.classList.add('good');else if(j==i)x.classList.add('bad')});
  if(i==q[2])qs++;$('qf').innerHTML='<div class="k">'+(i==q[2]?'✅ Benar! ':'❌ Belum tepat. ')+q[3]+'</div><button class="btn" onclick="qi++;qr()">Lanjut ➜</button>'}
 /* ===== Profil, simpan lokal, kirim ke guru ===== */
-var GAS_URL='GANTI_DENGAN_URL_WEB_APP_APPS_SCRIPT',sent=false,busy=false;
+var GAS_URL='https://script.google.com/macros/s/AKfycbzogzCkWeA6dS6uPBV2A0lrFAAWp-VUIQom9Q_-hvnSR5t4ar-ofKxbETp6Q1qX3L_MuA/exec',sent=false,busy=false;
 function save(){try{localStorage.setItem('akl_x',JSON.stringify({S:S,n:$('nm').value,k:$('kl').value}))}catch(e){}}
 function setProf(){sent=false;save();refreshKirim()}
 function ringkas(){var b=[],s=[],k=[];ST.forEach(function(x,i){(x==2?b:x==1?s:k).push(i+1)});
